@@ -1,105 +1,118 @@
-📸 Auto Screenshot Saver
+📸 ScreenshotApp
 
-Um programa em Python que monitora a tecla Print Screen e salva automaticamente a captura de tela como imagem em uma pasta organizada.
-Ideal para quem tira muitos prints e quer evitar o trabalho manual de colar e salvar.
+Um utilitário leve em Python que monitora a tecla Print Screen e salva automaticamente capturas de tela em uma pasta organizada, exibindo notificações modernas do Windows a cada captura.
 
-✅ Funcionalidades
+🚀 Novidades da Versão Atual
+🧠 1. Execução paralela (multithreading)
 
-Captura automaticamente qualquer print enviado ao clipboard após pressionar Print Screen.
+Cada captura é executada em uma thread separada, permitindo tirar várias capturas rapidamente sem travar o programa.
 
-Salva a imagem em uma pasta específica (ex.: Pictures/Prints_Automaticos).
+Antes, o programa esperava terminar a primeira captura para aceitar outra.
 
-Cria nomes de arquivo com data e hora para evitar duplicados.
+⚡ 2. Notificações nativas modernas
 
-Roda em segundo plano e exibe logs no terminal.
+Agora usa a biblioteca winotify
 
-Código organizado usando boas práticas (módulos, separação de responsabilidades, config centralizada).
+📁 3. Salvamento automático organizado
 
-📁 Estrutura do Projeto
-auto_screenshot/
-│
-├── main.py                 # Loop principal que monitora Print Screen
-├── config.py               # Configurações globais
-├── utils/
-│   ├── __init__.py
-│   ├── file_manager.py     # Manipulação de pastas e nomes de arquivo
-│   └── screenshot.py       # Lógica de captura e salvamento da imagem
-└── requirements.txt        # Dependências do projeto
+As imagens são salvas automaticamente na pasta:
 
-🧩 Instalação
-1️⃣ Clone o repositório
-git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
-cd NOME_DO_REPOSITORIO
+C:\Users\<seu_nome>\Pictures\Capturas\
 
-Crie um ambiente virtual (opcional, recomendado)
-python -m venv .venv
 
-Ativar:
+Cada arquivo recebe o nome no formato:
+2025-11-06_14-00-35.png
 
-Windows
-.venv\Scripts\activate
+🧩 4. Código mais robusto
 
-Linux/Mac
-source .venv/bin/activate
+Tratamento de exceções aprimorado
 
-3️⃣ Instale as dependências
-pip install -r requirements.txt
+Continua funcionando mesmo se a notificação falhar
 
-▶️ Como usar
+Compatível com o modo Ctrl+C para encerrar de forma limpa
 
-Execute o programa:
+Sem travamentos ou lentidão após várias capturas
+
+🔔 5. Feedback visual e auditivo (opcional)
+
+O código já está preparado para adicionar:
+
+Som de clique de câmera 🎵
+
+Flash visual breve 💡
+
+Esses efeitos podem ser ativados facilmente para melhorar a experiência do usuário.
+
+🪄 6. Execução rápida sem VSCode
+
+Agora você pode:
+
+Criar um atalho .bat para iniciar com duplo clique
+
+Ou gerar um .exe com pyinstaller:
+
+pyinstaller --onefile main.py
+
+E até definir uma tecla de atalho global, como Ctrl + Alt + P, para iniciar o monitoramento sem abrir o editor.
+
+
+⚙️ Instalação
+
+Clone o projeto ou baixe os arquivos.
+
+Instale as dependências:
+
+pip install pillow keyboard winotify
+
+Execute:
+
 python main.py
 
-A partir disso:
 
-✅ toda vez que você pressionar Print Screen,
-✅ o conteúdo do clipboard será salvo automaticamente em:
-Pictures/Prints_Automaticos
+🧱 Estrutura de pastas
+📁 ScreenshotApp/
+│
+├── main.py                 # Lógica principal (monitoramento da tecla Print)
+├── config.py               # Configurações gerais (ex: tempo entre capturas)
+├── 📁 utils/
+│   └── screenshot.py       # Função de captura e salvamento
 
-O programa cria o diretório automaticamente se ele não existir.
 
-⚙️ Configurações
 
-Você pode ajustar as opções no arquivo config.py:
-SAVE_PATH = r"Caminho onde os prints serão salvos"
-SLEEP_TIME = 1.0  # Intervalo para evitar duplicações
-FILENAME_FORMAT = "print_{timestamp}.png"
+💡 Uso
 
-Modifique livremente conforme sua necessidade.
+Execute o programa (python main.py ou pelo atalho .bat).
 
-🧱 Tecnologias utilizadas
+Pressione Print Screen a qualquer momento.
 
-Python 3.x
+A captura será salva automaticamente e você verá uma notificação 📢.
 
-Pillow (manipulação de imagens)
+Pressione Ctrl + C para encerrar.
 
-Keyboard (monitoramento de tecla)
 
-Estrutura organizada em módulos
+🧰 Tecnologias utilizadas
 
-🚀 Melhorias futuras (opcionais)
+🐍 Python 3.10+
 
-Executável .exe para Windows (PyInstaller)
+🖼️ Pillow (PIL) — captura da área de transferência
 
-Notificações no sistema ao salvar prints
+⌨️ Keyboard — monitoramento da tecla Print Screen
 
-Interface gráfica para configurar o programa
+🔔 Winotify — notificações nativas do Windows
 
-Upload automático para: Google Drive, Dropbox ou Telegram
 
-Modo “minimizado para bandeja” (system tray)
+🧩 Próximas melhorias sugeridas
 
-📄 Licença
+🔊 Adicionar som de “click de câmera”
 
-Você pode definir a licença que preferir (MIT, Apache, GPL etc).
-Exemplo:
-Este projeto está licenciado sob a licença MIT — sinta-se livre para usar, modificar e distribuir.
+💡 Efeito de flash breve na tela ao capturar
 
-🤝 Contribuições
+🧠 Interface gráfica simples (PyQt / Tkinter)
 
-Contribuições são bem-vindas!
-Caso queira sugerir melhorias, abrir issues ou enviar pull requests — fique à vontade.
+☁️ Opção para enviar capturas direto ao Google Drive ou Dropbox
 
-⭐ Se gostou do projeto...
+👨‍💻 Autor
 
-Deixe uma estrela no GitHub ⭐ para apoiar!
+Pedro Vinícius Silva Magalhães
+
+Projeto pessoal de automação e produtividade em Python.
