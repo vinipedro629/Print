@@ -1,16 +1,20 @@
 from PIL import ImageGrab
-from utils.file_manager import ensure_directory_exists, generate_filename
-
+import os
+import time
 
 def save_screenshot_from_clipboard():
-    """Captura imagem do clipboard (Print Screen) e salva automaticamente."""
-    ensure_directory_exists()
-    img = ImageGrab.grabclipboard()
-    if img:
-        filename = generate_filename()
-        img.save(filename)
-        print(f"[✅] Print salvo em: {filename}")
-        return True
+    image = ImageGrab.grabclipboard()
+    if image:
+        # Caminho da pasta "Imagens/Capturas" do usuário
+        pictures_folder = os.path.join(os.path.expanduser("~"), "Pictures", "Capturas")
+        os.makedirs(pictures_folder, exist_ok=True)
+
+        # Nome do arquivo com data e hora
+        filename = time.strftime("%Y-%m-%d_%H-%M-%S.png")
+        path = os.path.join(pictures_folder, filename)
+
+        # Salva a imagem
+        image.save(path)
+        print(f"✅ Captura salva em: {path}")
     else:
-        print("[⚠️] Nenhuma imagem encontrada no clipboard.")
-        return False
+        print("⚠️ Nenhuma imagem encontrada na área de transferência.")
